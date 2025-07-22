@@ -1,0 +1,20 @@
+<svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="120" height="120" rx="24" fill="url(#paint0_linear)"/>
+  <g filter="url(#filter0_d)">
+    <path d="M60 80c-8-8-8-24 0-32 8 8 8 24 0 32z" fill="#f43f5e" fill-opacity="0.7"/>
+    <path d="M60 80c-8-8-8-24 0-32 8 8 8 24 0 32z" stroke="#f59e0b" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <ellipse cx="60" cy="90" rx="12" ry="4" fill="#f59e0b" fill-opacity="0.2"/>
+    <circle cx="60" cy="60" r="36" fill="#f43f5e" fill-opacity="0.08"/>
+  </g>
+  <defs>
+    <filter id="filter0_d" x="16" y="16" width="88" height="88" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+      <feGaussianBlur stdDeviation="2" result="effect1_foregroundBlur"/>
+    </filter>
+    <linearGradient id="paint0_linear" x1="0" y1="0" x2="120" y2="120" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#f43f5e"/>
+      <stop offset="1" stop-color="#f59e0b"/>
+    </linearGradient>
+  </defs>
+</svg> 

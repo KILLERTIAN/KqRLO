@@ -1,31 +1,70 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { Shield, Lock, Eye, ArrowRight } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Shield, Lock, Eye, ArrowRight, CheckCircle, Zap, Globe, Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
 
 export function Hero() {
+  const [currentFeature, setCurrentFeature] = useState(0);
+  const [isVerifying, setIsVerifying] = useState(false);
+  const [isVerified, setIsVerified] = useState(false);
+
+  const zkFeatures = [
+    {
+      icon: <Shield className="h-6 w-6" />,
+      title: "Zero-Knowledge Proofs",
+      description: "Prove your identity without revealing personal data"
+    },
+    {
+      icon: <Lock className="h-6 w-6" />,
+      title: "End-to-End Encryption",
+      description: "Military-grade encryption for all communications"
+    },
+    {
+      icon: <Eye className="h-6 w-6" />,
+      title: "Complete Privacy",
+      description: "No data collection, no tracking, no selling"
+    }
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentFeature((prev) => (prev + 1) % zkFeatures.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [zkFeatures.length]);
+
+  const handleVerification = async () => {
+    setIsVerifying(true);
+    // Simulate zk-SNARK verification process
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    setIsVerifying(false);
+    setIsVerified(true);
+  };
+
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Animated Background Particles */}
+    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 bg-[#0D1117]">
+      {/* Animated Background */}
       <div className="absolute inset-0">
+        <div className="absolute inset-0 bg-gradient-to-br from-[#0D1117] via-[#161B22] to-[#0D1117]" />
+        <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]" />
+        
+        {/* Floating Particles */}
         {[...Array(20)].map((_, i) => (
           <motion.div
             key={i}
-            className="particle"
+            className="absolute w-1 h-1 bg-[#58A6FF]/30 rounded-full"
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
-              width: `${Math.random() * 4 + 2}px`,
-              height: `${Math.random() * 4 + 2}px`,
             }}
             animate={{
               y: [0, -30, 0],
-              opacity: [0.3, 0.8, 0.3],
+              opacity: [0.3, 1, 0.3],
             }}
             transition={{
-              duration: Math.random() * 3 + 4,
+              duration: 3 + Math.random() * 2,
               repeat: Infinity,
               delay: Math.random() * 2,
             }}
@@ -33,114 +72,153 @@ export function Hero() {
         ))}
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.2 }}
-        >
-          {/* Main Heading */}
-          <motion.h1
-            className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          {/* Left Column - Content */}
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-center lg:text-left"
+          >
+            {/* Badge */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="inline-flex items-center px-4 py-2 bg-[#58A6FF]/10 border border-[#58A6FF]/20 rounded-full mb-8"
+            >
+              <Star className="h-4 w-4 text-[#58A6FF] mr-2" />
+              <span className="text-sm text-[#58A6FF] font-medium">Zero-Knowledge Technology</span>
+            </motion.div>
+
+            {/* Main Heading */}
+            <motion.h1
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight"
+            >
+              <span className="bg-gradient-to-r from-[#C9D1D9] via-white to-[#C9D1D9] bg-clip-text text-transparent">
+                Verify Your Identity
+              </span>
+              <br />
+              <span className="bg-gradient-to-r from-[#58A6FF] to-[#58A6FF]/80 bg-clip-text text-transparent">
+                Without Revealing It
+              </span>
+            </motion.h1>
+
+            {/* Subtitle */}
+            <motion.p
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+              className="text-lg text-[#C9D1D9] mb-8 max-w-2xl mx-auto lg:mx-0"
+            >
+              Revolutionary zk-SNARKs technology enables you to prove your age, nationality, 
+              or credentials without exposing any personal information. Complete privacy, 
+              mathematical certainty.
+            </motion.p>
+
+            {/* CTA Buttons */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.8 }}
+              className="flex flex-col sm:flex-row gap-4"
+            >
+              <Button
+                onClick={handleVerification}
+                disabled={isVerifying || isVerified}
+                className="bg-[#58A6FF] hover:bg-[#58A6FF]/80 text-[#0D1117] px-8 py-3 rounded-lg font-semibold transition-all duration-300 flex items-center justify-center"
+              >
+                {isVerifying ? (
+                  <>
+                    <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-[#0D1117] mr-2"></div>
+                    Generating Proof...
+                  </>
+                ) : isVerified ? (
+                  <>
+                    <CheckCircle className="h-5 w-5 mr-2" />
+                    Identity Verified
+                  </>
+                ) : (
+                  <>
+                    <Shield className="h-5 w-5 mr-2" />
+                    Start Verification
+                  </>
+                )}
+              </Button>
+              
+              <Button
+                variant="outline"
+                className="border-[#58A6FF]/50 text-[#58A6FF] hover:bg-[#58A6FF]/10 px-8 py-3 rounded-lg font-semibold transition-all duration-300"
+              >
+                Learn More
+                <ArrowRight className="h-5 w-5 ml-2" />
+              </Button>
+            </motion.div>
+
+
+          </motion.div>
+
+          {/* Right Column - Interactive Demo */}
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
+            className="relative"
           >
-            <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-              Zero Knowledge
-            </span>
-            <br />
-            <span className="text-white">Identity Proof</span>
-          </motion.h1>
+            {/* Feature Showcase */}
+            <div className="bg-[#161B22]/80 backdrop-blur-lg border border-[#30363D] rounded-2xl p-8">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentFeature}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.5 }}
+                  className="text-center"
+                >
+                  <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-[#58A6FF] to-[#58A6FF]/80 rounded-full mb-6">
+                    {zkFeatures[currentFeature].icon}
+                  </div>
+                  <h3 className="text-xl font-semibold text-[#C9D1D9] mb-3">
+                    {zkFeatures[currentFeature].title}
+                  </h3>
+                  <p className="text-[#8B949E]">
+                    {zkFeatures[currentFeature].description}
+                  </p>
+                </motion.div>
+              </AnimatePresence>
 
-          {/* Subtitle */}
-          <motion.p
-            className="text-xl md:text-2xl text-white/80 mb-8 max-w-3xl mx-auto"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-          >
-            Prove your identity without revealing personal information. 
-            Secure, private, and decentralized identity verification powered by blockchain.
-          </motion.p>
+              {/* Feature Indicators */}
+              <div className="flex justify-center mt-8 space-x-2">
+                {zkFeatures.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentFeature(index)}
+                    className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                      index === currentFeature 
+                        ? 'bg-[#58A6FF] w-8' 
+                        : 'bg-[#30363D] hover:bg-[#8B949E]'
+                    }`}
+                  />
+                ))}
+              </div>
+            </div>
 
-          {/* CTA Buttons */}
-          <motion.div
-            className="flex flex-col sm:flex-row gap-4 justify-center mb-12"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
-          >
-            <Button
-              size="lg"
-              className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white border-0 glow-hover"
+            {/* Floating Elements */}
+            <motion.div
+              animate={{ y: [-10, 10, -10] }}
+              transition={{ duration: 4, repeat: Infinity }}
+              className="absolute -top-4 -right-4 bg-gradient-to-r from-[#58A6FF] to-[#58A6FF]/80 rounded-full p-3"
             >
-              Get Started
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="glass border-white/20 text-white hover:bg-white/10"
-            >
-              Learn More
-            </Button>
+              <Zap className="h-6 w-6 text-[#0D1117]" />
+            </motion.div>
           </motion.div>
-
-          {/* Feature Cards */}
-          <motion.div
-            className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto"
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 1 }}
-          >
-            <FeatureCard
-              icon={<Shield className="h-8 w-8 text-blue-400" />}
-              title="Secure"
-              description="Military-grade encryption protects your identity data"
-              delay={0.2}
-            />
-            <FeatureCard
-              icon={<Eye className="h-8 w-8 text-purple-400" />}
-              title="Private"
-              description="Zero-knowledge proofs keep your data completely private"
-              delay={0.4}
-            />
-            <FeatureCard
-              icon={<Lock className="h-8 w-8 text-pink-400" />}
-              title="Decentralized"
-              description="No central authority controls your identity verification"
-              delay={0.6}
-            />
-          </motion.div>
-        </motion.div>
+        </div>
       </div>
     </section>
-  );
-}
-
-interface FeatureCardProps {
-  icon: React.ReactNode;
-  title: string;
-  description: string;
-  delay: number;
-}
-
-function FeatureCard({ icon, title, description, delay }: FeatureCardProps) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, delay }}
-      whileHover={{ scale: 1.05, y: -5 }}
-    >
-      <Card className="glass p-6 text-center hover:glow transition-all duration-300">
-        <div className="flex justify-center mb-4">
-          {icon}
-        </div>
-        <h3 className="text-xl font-semibold text-white mb-2">{title}</h3>
-        <p className="text-white/70">{description}</p>
-      </Card>
-    </motion.div>
   );
 }

@@ -15,8 +15,21 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "ZKIdentity - Zero Knowledge Identity Proof",
-  description: "Secure, private, and decentralized identity verification powered by zero-knowledge cryptography and blockchain technology.",
+  title: "KqRLO | Zero-Knowledge Identity Verification",
+  description: "Revolutionary privacy-first identity verification using zk-SNARKs. Prove your identity without revealing personal information. End-to-end encryption, no data selling, open source.",
+  keywords: "zero-knowledge, identity verification, zk-SNARKs, privacy, blockchain, authentication, security, KqRLO",
+  authors: [{ name: "KqRLO Team" }],
+  openGraph: {
+    title: "KqRLO | Zero-Knowledge Identity Verification",
+    description: "Revolutionary privacy-first identity verification using zk-SNARKs",
+    type: "website",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "KqRLO | Zero-Knowledge Identity Verification",
+    description: "Revolutionary privacy-first identity verification using zk-SNARKs",
+  },
 };
 
 export default function RootLayout({
@@ -26,7 +39,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-900 text-white`}>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-black text-white`}>
         <Providers>{children}</Providers>
       </body>
     </html>

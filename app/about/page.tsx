@@ -2,12 +2,11 @@
 
 import { motion } from 'framer-motion';
 import { Shield, Users, Globe, Zap, TrendingUp, Award } from 'lucide-react';
-import { Card } from '@/components/ui/card';
 
 const stats = [
   { icon: <Users className="h-8 w-8 text-blue-400" />, value: '10K+', label: 'Verified Users' },
   { icon: <Shield className="h-8 w-8 text-green-400" />, value: '99.9%', label: 'Security Rate' },
-  { icon: <Globe className="h-8 w-8 text-purple-400" />, value: '50+', label: 'Countries' },
+      { icon: <Globe className="h-8 w-8 text-zk-primary" />, value: '50+', label: 'Countries' },
   { icon: <Zap className="h-8 w-8 text-yellow-400" />, value: '<1s', label: 'Verification Time' },
 ];
 
@@ -23,13 +22,13 @@ const values = [
     description: 'Constantly pushing the boundaries of what\'s possible with cryptographic technology and blockchain innovation.'
   },
   {
-    icon: <Award className="h-12 w-12 text-purple-400" />,
+    icon: <Award className="h-12 w-12 text-zk-primary" />,
     title: 'Excellence',
     description: 'Committed to delivering the highest quality identity verification solutions with uncompromising security standards.'
   },
 ];
 
-export function About() {
+export default function AboutPage() {
   return (
     <section id="about" className="py-20 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -41,12 +40,12 @@ export function About() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-5xl font-bold mb-6">
-            <span className="bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent">
-              About ZKIdentity
+          <h2 className="text-3xl md:text-5xl font-bold mb-6 zephyr-heading">
+            <span className="zephyr-gradient-text">
+              About KqRLO
             </span>
           </h2>
-          <p className="text-xl text-white/80 max-w-3xl mx-auto">
+          <p className="text-xl text-white/80 max-w-3xl mx-auto leading-relaxed">
             We&apos;re building the future of digital identity verification, where privacy 
             and security aren&apos;t just features—they&apos;re fundamental principles.
           </p>
@@ -66,7 +65,7 @@ export function About() {
               whileHover={{ scale: 1.05, y: -5 }}
               transition={{ duration: 0.2 }}
             >
-              <Card className="glass p-6 text-center hover:glow transition-all duration-300">
+              <div className="zephyr-card p-6 text-center zephyr-hover">
                 <div className="flex justify-center mb-3">
                   {stat.icon}
                 </div>
@@ -76,7 +75,7 @@ export function About() {
                 <div className="text-white/60 text-sm">
                   {stat.label}
                 </div>
-              </Card>
+              </div>
             </motion.div>
           ))}
         </motion.div>
@@ -89,8 +88,8 @@ export function About() {
           viewport={{ once: true }}
           className="mb-16"
         >
-          <Card className="glass p-8 md:p-12 text-center">
-            <h3 className="text-2xl md:text-3xl font-bold text-white mb-6">
+          <div className="zephyr-card p-8 md:p-12 text-center zephyr-hover">
+            <h3 className="text-2xl md:text-3xl font-bold text-white mb-6 zephyr-heading">
               Our Mission
             </h3>
             <p className="text-lg text-white/80 leading-relaxed max-w-4xl mx-auto">
@@ -98,7 +97,7 @@ export function About() {
               We envision a world where individuals have complete control over their digital identity, 
               free from the constraints of centralized authorities and the risks of data breaches.
             </p>
-          </Card>
+          </div>
         </motion.div>
 
         {/* Values */}
@@ -108,7 +107,7 @@ export function About() {
           transition={{ duration: 0.8, delay: 0.6 }}
           viewport={{ once: true }}
         >
-          <h3 className="text-2xl md:text-3xl font-bold text-center text-white mb-12">
+          <h3 className="text-2xl md:text-3xl font-bold text-center text-white mb-12 zephyr-heading">
             Our Values
           </h3>
           <div className="grid md:grid-cols-3 gap-8">
@@ -121,7 +120,7 @@ export function About() {
                 viewport={{ once: true }}
                 whileHover={{ scale: 1.02, y: -5 }}
               >
-                <Card className="glass p-8 text-center h-full hover:glow transition-all duration-300">
+                <div className="zephyr-card p-8 text-center h-full zephyr-hover">
                   <div className="flex justify-center mb-6">
                     {value.icon}
                   </div>
@@ -131,7 +130,7 @@ export function About() {
                   <p className="text-white/70 leading-relaxed">
                     {value.description}
                   </p>
-                </Card>
+                </div>
               </motion.div>
             ))}
           </div>
@@ -145,10 +144,10 @@ export function About() {
           viewport={{ once: true }}
           className="mt-16"
         >
-          <Card className="glass p-8 md:p-12">
+          <div className="zephyr-card p-8 md:p-12 zephyr-hover">
             <div className="grid md:grid-cols-2 gap-8 items-center">
               <div>
-                <h3 className="text-2xl md:text-3xl font-bold text-white mb-6">
+                <h3 className="text-2xl md:text-3xl font-bold text-white mb-6 zephyr-heading">
                   Cutting-Edge Technology
                 </h3>
                 <p className="text-white/80 leading-relaxed mb-6">
@@ -162,7 +161,7 @@ export function About() {
                     Zero-Knowledge Succinct Non-Interactive Arguments of Knowledge (zk-SNARKs)
                   </div>
                   <div className="flex items-center text-white/70">
-                    <div className="w-2 h-2 bg-purple-400 rounded-full mr-3"></div>
+                    <div className="w-2 h-2 bg-zk-primary rounded-full mr-3"></div>
                     Ethereum Virtual Machine (EVM) Compatible Smart Contracts
                   </div>
                   <div className="flex items-center text-white/70">
@@ -172,7 +171,7 @@ export function About() {
                 </div>
               </div>
               <div className="relative">
-                <div className="w-full h-64 glass rounded-lg flex items-center justify-center">
+                <div className="w-full h-64 zephyr-card rounded-lg flex items-center justify-center">
                   <div className="text-center">
                     <Shield className="h-16 w-16 text-blue-400 mx-auto mb-4" />
                     <p className="text-white/60">Secure Architecture</p>
@@ -180,7 +179,7 @@ export function About() {
                 </div>
               </div>
             </div>
-          </Card>
+          </div>
         </motion.div>
       </div>
     </section>

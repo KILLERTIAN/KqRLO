@@ -45,34 +45,34 @@
 
 :root {
   --radius: 0.625rem;
-  /* Modern Tech Color Scheme */
-  --background: #0D1117; /* Very Dark Navy */
-  --foreground: #C9D1D9; /* Light Grey */
-  --card: #161B22; /* Deep Grey */
-  --card-foreground: #C9D1D9; /* Light Grey */
-  --popover: #161B22; /* Deep Grey */
-  --popover-foreground: #C9D1D9; /* Light Grey */
-  --primary: #58A6FF; /* Soft Blue */
-  --primary-foreground: #0D1117; /* Very Dark Navy */
-  --secondary: #161B22; /* Deep Grey */
-  --secondary-foreground: #C9D1D9; /* Light Grey */
-  --muted: #21262D; /* Slightly lighter than card */
-  --muted-foreground: #8B949E; /* Muted grey */
-  --accent: #58A6FF; /* Soft Blue */
-  --accent-foreground: #0D1117; /* Very Dark Navy */
-  --destructive: #F85149; /* Red for errors */
-  --border: #30363D; /* Border grey */
-  --input: #21262D; /* Input background */
-  --ring: #58A6FF; /* Focus ring - Soft Blue */
-  --chart-1: #58A6FF; /* Soft Blue */
-  --chart-2: #7C3AED; /* Purple */
+  /* Light Mode Color Scheme */
+  --background: #F8FAFC; /* Light background */
+  --foreground: #1E293B; /* Dark text */
+  --card: #FFFFFF; /* White card */
+  --card-foreground: #1E293B; /* Dark text on card */
+  --popover: #FFFFFF; /* White popover */
+  --popover-foreground: #1E293B; /* Dark text on popover */
+  --primary: #3B82F6; /* Blue */
+  --primary-foreground: #FFFFFF; /* White text on primary */
+  --secondary: #F1F5F9; /* Light grey */
+  --secondary-foreground: #1E293B; /* Dark text on secondary */
+  --muted: #F1F5F9; /* Light grey */
+  --muted-foreground: #64748B; /* Muted text */
+  --accent: #3B82F6; /* Blue */
+  --accent-foreground: #FFFFFF; /* White text on accent */
+  --destructive: #EF4444; /* Red for errors */
+  --border: #E2E8F0; /* Light border */
+  --input: #F1F5F9; /* Light input */
+  --ring: #3B82F6; /* Focus ring - Blue */
+  --chart-1: #3B82F6; /* Blue */
+  --chart-2: #8B5CF6; /* Purple */
   --chart-3: #10B981; /* Green */
   --chart-4: #F59E0B; /* Orange */
   --chart-5: #EF4444; /* Red */
 }
 
 .dark {
-  /* Modern Tech Dark Mode - Same as root since we're dark by default */
+  /* Dark Mode Color Scheme */
   --background: #0D1117; /* Very Dark Navy */
   --foreground: #C9D1D9; /* Light Grey */
   --card: #161B22; /* Deep Grey */
@@ -306,4 +306,39 @@
     transform: translateY(-25px) rotate(2deg) scale(1.05);
     opacity: 0.9;
   }
+}/* Glass Effect for Buttons and Cards */
+.glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.glass:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* Dark mode glass effect */
+.dark .glass {
+  background: rgba(22, 27, 34, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dark .glass:hover {
+  background: rgba(22, 27, 34, 0.8);
+}
+
+/* Glow Effect for Buttons */
+.hover\:glow:hover {
+  box-shadow: 0 0 15px rgba(88, 166, 255, 0.5);
+}
+
+/* Button Styles */
+.btn-primary {
+  @apply px-6 py-3 bg-primary text-primary-foreground font-medium rounded-lg hover:bg-primary/90 transition-all duration-300;
+}
+
+.btn-secondary {
+  @apply px-6 py-3 bg-secondary text-secondary-foreground font-medium rounded-lg hover:bg-secondary/90 transition-all duration-300;
 }

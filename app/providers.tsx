@@ -2,8 +2,10 @@
 
 import dynamic from 'next/dynamic';
 import { getDefaultConfig } from '@rainbow-me/rainbowkit';
+import { darkTheme } from '@rainbow-me/rainbowkit';
 import { defineChain } from 'viem';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { useEffect } from 'react';
 
 const queryClient = new QueryClient();
 
@@ -17,14 +19,13 @@ const RainbowKitProvider = dynamic(
   { ssr: false }
 );
 
-// ✅ Official X Layer Testnet with OKB icon
+// ✅ X Layer Chains (same as before)
 const xLayerTestnet = defineChain({
   id: 195,
   name: 'X Layer Testnet',
   network: 'xlayertest',
   iconUrl: 'https://static.okx.cab/cdn/wallet/logo/okb_22400.png',
-//   , 'https://static.okx.com/cdn/wallet/logo/okb.png'], 
-  iconBackground: '#FF6600',  // OKX orange for contrast
+  iconBackground: '#FF6600',
   nativeCurrency: { name: 'OKB', symbol: 'OKB', decimals: 18 },
   rpcUrls: {
     default: {
@@ -77,10 +78,25 @@ export function Providers({ children }: { children: React.ReactNode }) {
     ssr: true,
   });
 
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    document.documentElement.classList.toggle('dark', savedTheme === 'dark');
+  }, []);
+
+  const customDarkTheme = darkTheme({
+    accentColor: '#FF6600',        // OKX orange
+    accentColorForeground: 'white',
+    borderRadius: 'large',
+    fontStack: 'system',
+    overlayBlur: 'small',
+  });
+
   return (
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
-        <RainbowKitProvider>{children}</RainbowKitProvider>
+        <RainbowKitProvider theme={customDarkTheme}>
+          {children}
+        </RainbowKitProvider>
       </QueryClientProvider>
     </WagmiProvider>
   );

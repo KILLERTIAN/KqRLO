@@ -1,201 +1,134 @@
 'use client';
-
-import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Wallet, Shield, Eye, Trash2 } from 'lucide-react';
+import { ConnectButton } from '@rainbow-me/rainbowkit';
+import Image from 'next/image';
+import { useState, useEffect, useCallback } from 'react';
+import { useAccount, usePublicClient } from 'wagmi';
+import { zkIdentityAddress, zkIdentityAbi } from '../app/contracts/zkIdentity';
+import { CheckCircle } from 'lucide-react';
 
 export function XConnectButton() {
-  const [isConnected, setIsConnected] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [showProofModal, setShowProofModal] = useState(false);
-  const [showDestructModal, setShowDestructModal] = useState(false);
+  const { address } = useAccount();
+  const publicClient = usePublicClient();
+  const [isVerified, setIsVerified] = useState(false);
 
-  const handleConnect = async () => {
-    setIsLoading(true);
-    // Simulate connection process
-    setTimeout(() => {
-      setIsConnected(true);
-      setIsLoading(false);
-    }, 2000);
-  };
+  const checkVerification = useCallback(async () => {
+    if (!address || !publicClient) return;
+    try {
+      const isVerifiedStatus = await publicClient.readContract({
+        address: zkIdentityAddress,
+        abi: zkIdentityAbi,
+        functionName: 'isVerified',
+        args: [address],
+      });
+      setIsVerified(isVerifiedStatus as boolean);
+    } catch (error) {
+      console.error("Error checking verification status:", error);
+      setIsVerified(false);
+    }
+  }, [address, publicClient]);
 
-  const handleDisconnect = () => {
-    setIsConnected(false);
-  };
 
-  const handleSelfDestruct = () => {
-    setShowDestructModal(false);
-    setIsConnected(false);
-    // Simulate data destruction
-  };
 
-  if (isConnected) {
+  useEffect(() => {
+    checkVerification();
+  }, [checkVerification]);
+
   return (
-      <div className="space-y-4">
     <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          className="card p-6"
-        >
-          <div className="flex items-center justify-between mb-4">
-            <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
-                <Shield className="h-5 w-5 text-green-600" />
-              </div>
-              <div>
-                <h3 className="font-semibold text-gray-900">Identity Verified</h3>
-                <p className="text-sm text-gray-600">Zero-knowledge proof generated</p>
-              </div>
-            </div>
-            <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
-          </div>
-
-          <div className="grid grid-cols-2 gap-4 mb-4">
-            <div className="text-center p-3 bg-zk-primary/10 rounded-lg">
-              <div className="text-lg font-bold text-zk-primary">98%</div>
-              <div className="text-xs text-gray-600">Privacy Score</div>
-            </div>
-            <div className="text-center p-3 bg-zk-primary/10 rounded-lg">
-              <div className="text-lg font-bold text-zk-primary">0</div>
-              <div className="text-xs text-gray-600">Data Shared</div>
-            </div>
-          </div>
-
-          <div className="flex space-x-3">
-            <motion.button
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
-              onClick={() => setShowProofModal(true)}
-              className="flex-1 btn-secondary flex items-center justify-center space-x-2"
+      className="inline-block">
+      <ConnectButton.Custom>
+        {({
+          account,
+          chain,
+          openChainModal,
+          openConnectModal,
+          openAccountModal,
+          mounted
+        }) => {
+          const ready = mounted;
+          const connected = ready && account && chain;
+          return (
+            <div
+              {...(!ready && {
+                'aria-hidden': true,
+                style: {
+                  opacity: 0,
+                  pointerEvents: 'none',
+                  userSelect: 'none',
+                },
+              })}
             >
-              <Eye className="h-4 w-4" />
-              <span>View Proof</span>
-            </motion.button>
+              {(() => {
+                if (!connected) {
+                  return (
                     <motion.button
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              onClick={() => setShowDestructModal(true)}
-              className="px-4 py-2 bg-red-50 text-red-600 rounded-lg hover:bg-red-100 transition-colors duration-300 flex items-center space-x-2"
-            >
-              <Trash2 className="h-4 w-4" />
-              <span>Destroy</span>
+                      onClick={openConnectModal}
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition-all duration-300 border border-blue-500/20 hover:border-blue-500/40 hover:shadow-lg hover:shadow-blue-500/20">
+                      Connect Wallet
                     </motion.button>
-          </div>
-
-          <button
-            onClick={handleDisconnect}
-            className="w-full mt-3 text-sm text-gray-500 hover:text-gray-700 transition-colors duration-300"
-          >
-            Disconnect Wallet
-          </button>
-        </motion.div>
-
-        {/* Proof Preview Modal */}
-        {showProofModal && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50"
-            onClick={() => setShowProofModal(false)}
-          >
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              className="bg-white rounded-2xl p-6 max-w-md w-full"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <h3 className="font-semibold text-gray-900 mb-4">Proof Preview</h3>
-              <div className="space-y-3 mb-6">
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Identity Verified:</span>
-                  <span className="font-medium text-green-600">✓ Yes</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Age Over 18:</span>
-                  <span className="font-medium text-green-600">✓ Yes</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Location:</span>
-                  <span className="font-medium text-gray-400">Not Revealed</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Personal Data:</span>
-                  <span className="font-medium text-gray-400">Not Revealed</span>
-                </div>
-              </div>
-              <button
-                onClick={() => setShowProofModal(false)}
-                className="w-full btn-primary"
-              >
-                Close
-              </button>
-            </motion.div>
-          </motion.div>
-        )}
-
-        {/* Self Destruct Modal */}
-        {showDestructModal && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50"
-            onClick={() => setShowDestructModal(false)}
-          >
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              className="bg-white rounded-2xl p-6 max-w-md w-full"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div className="text-center mb-6">
-                <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Trash2 className="h-8 w-8 text-red-600" />
-                </div>
-                <h3 className="font-semibold text-gray-900 mb-2">Destroy Identity Proof?</h3>
-                <p className="text-gray-600 text-sm">
-                  This will permanently delete your zero-knowledge proof. This action cannot be undone.
-                </p>
-              </div>
-              <div className="flex space-x-3">
-                <button
-                  onClick={() => setShowDestructModal(false)}
-                  className="flex-1 btn-secondary"
-                >
-                  Cancel
-                </button>
-                <button
-                  onClick={handleSelfDestruct}
-                  className="flex-1 bg-red-600 hover:bg-red-700 text-white font-medium py-3 px-6 rounded-lg transition-colors duration-300"
-                    >
-                  Destroy
-                </button>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </div>
                   );
                 }
-
-                return (
+                if (chain.unsupported) {
+                  return (
                     <motion.button
-      whileHover={{ scale: 1.02 }}
-      whileTap={{ scale: 0.98 }}
-      onClick={handleConnect}
-      disabled={isLoading}
-      className="btn-primary flex items-center space-x-2"
-                    >
-      {isLoading ? (
-        <>
-          <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
-          <span>Connecting...</span>
-        </>
-                      ) : (
-        <>
-          <Wallet className="h-5 w-5" />
-          <span>Connect Wallet</span>
-        </>
-      )}
-                        </motion.button>
+                      onClick={openChainModal}
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="glass px-6 py-3 rounded-lg text-destructive font-medium hover:glow transition-all duration-300 border border-destructive/20 hover:border-destructive/40">
+                      Wrong Network
+                    </motion.button>
+                  );
+                }
+                return (
+                  <div className="flex items-center space-x-3">
+                    <motion.button
+                      onClick={openChainModal}
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="glass px-4 py-2 rounded-lg text-foreground font-medium hover:glow transition-all duration-300 border border-primary/20 hover:border-primary/40 flex items-center space-x-2">
+                      {chain.iconUrl && (
+                        <Image
+                          src={chain.iconUrl}
+                          alt={"x-layer"}
+                          width={20}
+                          height={20}
+                          className="rounded-full"
+                        />
+                      )}
+                      <span className="hidden sm:inline">{chain.name}</span>
+                    </motion.button>
+                    <motion.button
+                      onClick={openAccountModal}
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="glass px-4 py-2 rounded-lg text-foreground font-medium hover:glow transition-all duration-300 border border-primary/20 hover:border-primary/40">
+                      <span className="hidden sm:inline">
+                        {account.displayName}
+                        {account.displayBalance ? ` (${account.displayBalance})` : ''}
+                      </span>
+                      <span className="sm:hidden">{account.displayName?.slice(0, 6)}...</span>
+                    </motion.button>
+                    {isVerified && (
+                      <motion.div
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                        className="glass px-4 py-2 rounded-lg border border-green-400/20 flex items-center space-x-2">
+                        <CheckCircle className="h-4 w-4 text-green-400" />
+                        <span className="text-green-400 font-medium">Verified</span>
+                      </motion.div>
+                    )}
+                  </div>
+                );
+              })()}
+            </div>
+          );
+        }}
+      </ConnectButton.Custom>
+    </motion.div>
   );
 }

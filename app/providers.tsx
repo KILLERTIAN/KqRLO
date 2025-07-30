@@ -2,10 +2,10 @@
 
 import dynamic from 'next/dynamic';
 import { getDefaultConfig } from '@rainbow-me/rainbowkit';
-import { darkTheme } from '@rainbow-me/rainbowkit';
+import { darkTheme, lightTheme } from '@rainbow-me/rainbowkit';
 import { defineChain } from 'viem';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { useEffect } from 'react';
+import { ThemeProvider, useTheme } from '@/contexts/ThemeContext';
 
 const queryClient = new QueryClient();
 
@@ -70,6 +70,32 @@ const xLayerMainnet = defineChain({
   testnet: false,
 });
 
+function RainbowKitThemeProvider({ children }: { children: React.ReactNode }) {
+  const { theme } = useTheme();
+  
+  const customDarkTheme = darkTheme({
+    accentColor: '#58A6FF',        // Soft Blue for dark mode
+    accentColorForeground: '#0D1117',
+    borderRadius: 'large',
+    fontStack: 'system',
+    overlayBlur: 'small',
+  });
+
+  const customLightTheme = lightTheme({
+    accentColor: '#3B82F6',        // Blue for light mode
+    accentColorForeground: '#FFFFFF',
+    borderRadius: 'large',
+    fontStack: 'system',
+    overlayBlur: 'small',
+  });
+
+  return (
+    <RainbowKitProvider theme={theme === 'dark' ? customDarkTheme : customLightTheme}>
+      {children}
+    </RainbowKitProvider>
+  );
+}
+
 export function Providers({ children }: { children: React.ReactNode }) {
   const config = getDefaultConfig({
     appName: 'ZK Identity Verification',
@@ -78,26 +104,15 @@ export function Providers({ children }: { children: React.ReactNode }) {
     ssr: true,
   });
 
-  useEffect(() => {
-    const savedTheme = localStorage.getItem('theme') || 'dark';
-    document.documentElement.classList.toggle('dark', savedTheme === 'dark');
-  }, []);
-
-  const customDarkTheme = darkTheme({
-    accentColor: '#FF6600',        // OKX orange
-    accentColorForeground: 'white',
-    borderRadius: 'large',
-    fontStack: 'system',
-    overlayBlur: 'small',
-  });
-
   return (
-    <WagmiProvider config={config}>
-      <QueryClientProvider client={queryClient}>
-        <RainbowKitProvider theme={customDarkTheme}>
-          {children}
-        </RainbowKitProvider>
-      </QueryClientProvider>
-    </WagmiProvider>
+    <ThemeProvider>
+      <WagmiProvider config={config}>
+        <QueryClientProvider client={queryClient}>
+          <RainbowKitThemeProvider>
+            {children}
+          </RainbowKitThemeProvider>
+        </QueryClientProvider>
+      </WagmiProvider>
+    </ThemeProvider>
   );
 }

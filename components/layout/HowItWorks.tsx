@@ -10,7 +10,7 @@ export function HowItWorks() {
       title: "Connect Your Wallet",
       description: "Securely connect your Web3 wallet to begin the privacy-first identity verification process.",
       icon: <Wallet className="h-8 w-8" />,
-      color: "from-[#58A6FF] to-[#7C3AED]",
+      color: "from-primary to-accent",
       details: [
         "Multi-wallet support (MetaMask, WalletConnect, etc.)",
         "Secure connection with end-to-end encryption",
@@ -23,7 +23,7 @@ export function HowItWorks() {
       title: "Generate Zero-Knowledge Proof",
       description: "Our advanced algorithms create cryptographic proofs that verify your identity without revealing any personal data.",
       icon: <Shield className="h-8 w-8" />,
-      color: "from-[#10B981] to-[#059669]",
+      color: "from-green-500 to-green-600",
       details: [
         "Advanced zk-SNARKs cryptographic proof generation",
         "Mathematically guaranteed zero data leakage",
@@ -60,7 +60,7 @@ export function HowItWorks() {
   ];
 
   return (
-    <section id="how-it-works" className="py-24 bg-[#161B22]/50">
+    <section id="how-it-works" className="py-24 bg-muted/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -69,17 +69,17 @@ export function HowItWorks() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <div className="inline-flex items-center px-4 py-2 bg-[#58A6FF]/10 border border-[#58A6FF]/20 rounded-full mb-6">
-            <Play className="h-4 w-4 text-[#58A6FF] mr-2" />
-            <span className="text-sm text-[#58A6FF] font-medium">How It Works</span>
+          <div className="inline-flex items-center px-4 py-2 bg-primary/10 border border-primary/20 rounded-full mb-6">
+            <Play className="h-4 w-4 text-primary mr-2" />
+            <span className="text-sm text-primary font-medium">How It Works</span>
           </div>
 
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            <span className="bg-gradient-to-r from-[#C9D1D9] to-white bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-foreground to-foreground bg-clip-text text-transparent">
               Simple, Secure, Private
             </span>
           </h2>
-          <p className="text-xl text-[#8B949E] max-w-3xl mx-auto">
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             A straightforward process to verify your identity without compromising your personal data using zero-knowledge technology.
           </p>
         </motion.div>
@@ -93,12 +93,12 @@ export function HowItWorks() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="bg-[#161B22] border border-[#30363D] rounded-2xl p-6 hover:border-[#58A6FF]/30 transition-all duration-300 group hover:shadow-lg hover:shadow-[#58A6FF]/10"
+              className="bg-card border border-border rounded-2xl p-6 hover:border-primary/30 transition-all duration-300 group hover:shadow-lg hover:shadow-primary/10"
               whileHover={{ y: -5 }}
             >
               {/* Step Number & Icon */}
               <div className="flex items-center justify-between mb-6">
-                <span className="text-3xl font-bold bg-gradient-to-r from-[#58A6FF] to-[#7C3AED] bg-clip-text text-transparent">
+                <span className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
                   {step.number}
                 </span>
                 <div className={`w-12 h-12 bg-gradient-to-br ${step.color} rounded-xl flex items-center justify-center text-white group-hover:scale-110 transition-transform duration-300`}>
@@ -107,12 +107,12 @@ export function HowItWorks() {
               </div>
 
               {/* Title */}
-              <h3 className="text-xl font-bold text-[#C9D1D9] mb-3 group-hover:text-white transition-colors duration-300">
+              <h3 className="text-xl font-bold text-card-foreground mb-3 group-hover:text-foreground transition-colors duration-300">
                 {step.title}
               </h3>
 
               {/* Description */}
-              <p className="text-[#8B949E] mb-6 leading-relaxed">
+              <p className="text-muted-foreground mb-6 leading-relaxed">
                 {step.description}
               </p>
 
@@ -120,15 +120,15 @@ export function HowItWorks() {
               <div className="space-y-3">
                 {step.details.map((detail, detailIndex) => (
                   <div key={detailIndex} className="flex items-start space-x-3">
-                    <div className="w-1.5 h-1.5 bg-[#58A6FF] rounded-full mt-2 flex-shrink-0" />
-                    <span className="text-[#8B949E] text-sm leading-relaxed">{detail}</span>
+                    <div className="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0" />
+                    <span className="text-muted-foreground text-sm leading-relaxed">{detail}</span>
                   </div>
                 ))}
               </div>
 
               {/* Hover Arrow */}
               <div className="mt-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <ArrowRight className="h-5 w-5 text-[#58A6FF]" />
+                <ArrowRight className="h-5 w-5 text-primary" />
               </div>
             </motion.div>
           ))}
@@ -142,18 +142,18 @@ export function HowItWorks() {
           viewport={{ once: true }}
           className="text-center"
         >
-          <div className="bg-[#161B22] border border-[#30363D] rounded-2xl p-8 max-w-3xl mx-auto shadow-lg">
-            <h3 className="text-2xl font-bold text-[#C9D1D9] mb-4">
+          <div className="bg-card border border-border rounded-2xl p-8 max-w-3xl mx-auto shadow-lg">
+            <h3 className="text-2xl font-bold text-card-foreground mb-4">
               Ready to Experience Privacy-First Identity?
             </h3>
-            <p className="text-[#8B949E] mb-6">
+            <p className="text-muted-foreground mb-6">
               Join thousands of users who have already secured their digital identity with zero-knowledge proofs.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-gradient-to-r from-[#58A6FF] to-[#7C3AED] hover:from-[#4A9EFF] hover:to-[#6D28D9] text-white font-semibold px-8 py-3 rounded-lg transition-all duration-300 shadow-lg hover:shadow-[#58A6FF]/25"
+                className="bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-primary-foreground font-semibold px-8 py-3 rounded-lg transition-all duration-300 shadow-lg hover:shadow-primary/25"
               >
                 <Shield className="h-5 w-5 mr-2 inline" />
                 Get Started Now
@@ -161,7 +161,7 @@ export function HowItWorks() {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-[#21262D] border border-[#30363D] text-[#C9D1D9] hover:bg-[#30363D] hover:border-[#58A6FF]/30 font-semibold px-8 py-3 rounded-lg transition-all duration-300"
+                className="bg-muted border border-border text-card-foreground hover:bg-muted/80 hover:border-primary/30 font-semibold px-8 py-3 rounded-lg transition-all duration-300"
               >
                 <ArrowRight className="h-5 w-5 mr-2 inline" />
                 View Documentation

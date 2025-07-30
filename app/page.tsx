@@ -9,7 +9,7 @@ import { CookieConsent } from '@/components/ui/CookieConsent';
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-[#0D1117] text-[#C9D1D9]">
+    <div className="min-h-screen bg-background text-foreground">
       <Navbar />
       <main id="home">
         <Hero />

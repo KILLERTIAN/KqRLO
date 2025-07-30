@@ -188,9 +188,9 @@ export function Navbar() {
                 </div>
 
                 {/* Mobile Privacy Status */}
-                <div className="flex items-center justify-center space-x-2 px-3 py-2 bg-[#10B981]/10 border border-[#10B981]/20 rounded-lg mt-2">
-                  <Lock className="h-4 w-4 text-[#10B981]" />
-                  <span className="text-sm text-[#10B981] font-medium">End-to-End Encrypted</span>
+                <div className="flex items-center justify-center space-x-2 px-3 py-2 bg-green-500/10 border border-green-500/20 rounded-lg mt-2">
+                  <Lock className="h-4 w-4 text-green-500" />
+                  <span className="text-sm text-green-500 font-medium">End-to-End Encrypted</span>
                 </div>
               </div>
             </motion.div>
@@ -208,15 +208,15 @@ export function Navbar() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2">
           <div className="flex items-center justify-center space-x-8 text-xs text-muted-foreground">
             <div className="flex items-center space-x-2">
-              <div className="w-2 h-2 bg-[#10B981] rounded-full animate-pulse"></div>
-              <span className="text-[#10B981] font-medium">Secure</span>
+              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+              <span className="text-green-500 font-medium">Secure</span>
             </div>
             <div className="flex items-center space-x-2">
               <Eye className="h-3 w-3 text-primary" />
               <span>No Data Selling</span>
             </div>
             <div className="flex items-center space-x-2">
-              <Lock className="h-3 w-3 text-[#10B981]" />
+              <Lock className="h-3 w-3 text-green-500" />
               <span>End-to-End Encrypted</span>
             </div>
             <div className="flex items-center space-x-2">

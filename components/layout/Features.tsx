@@ -59,7 +59,7 @@ export function Features() {
   ];
 
   return (
-    <section id="features" className="py-24 bg-[#0D1117]">
+    <section id="features" className="py-24 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
@@ -69,17 +69,17 @@ export function Features() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <div className="inline-flex items-center px-4 py-2 bg-[#58A6FF]/10 border border-[#58A6FF]/20 rounded-full mb-6">
-            <Star className="h-4 w-4 text-[#58A6FF] mr-2" />
-            <span className="text-sm text-[#58A6FF] font-medium">Advanced Features</span>
+          <div className="inline-flex items-center px-4 py-2 bg-primary/10 border border-primary/20 rounded-full mb-6">
+            <Star className="h-4 w-4 text-primary mr-2" />
+            <span className="text-sm text-primary font-medium">Advanced Features</span>
           </div>
           
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            <span className="bg-gradient-to-r from-[#C9D1D9] to-white bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-foreground to-foreground bg-clip-text text-transparent">
               Cutting-Edge Privacy Technology
             </span>
           </h2>
-          <p className="text-xl text-[#8B949E] max-w-3xl mx-auto">
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             Revolutionary features that set new standards for digital identity protection and zero-knowledge verification.
           </p>
         </motion.div>
@@ -93,39 +93,39 @@ export function Features() {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="bg-[#161B22] border border-[#30363D] rounded-2xl p-8 shadow-2xl hover:shadow-[#58A6FF]/10 hover:shadow-2xl transition-all duration-300"
+            className="bg-card border border-border rounded-2xl p-8 shadow-2xl hover:shadow-primary/10 hover:shadow-2xl transition-all duration-300"
           >
             {/* Main Feature Icon */}
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-[#58A6FF] to-[#7C3AED] rounded-2xl mb-6">
+            <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-primary to-accent rounded-2xl mb-6">
               {mainFeature.icon}
             </div>
 
             {/* Main Feature Content */}
-            <h3 className="text-3xl font-bold text-[#C9D1D9] mb-2">
+            <h3 className="text-3xl font-bold text-card-foreground mb-2">
               {mainFeature.title}
             </h3>
-            <p className="text-[#58A6FF] text-sm font-medium mb-4">
+            <p className="text-primary text-sm font-medium mb-4">
               {mainFeature.subtitle}
             </p>
-            <p className="text-[#8B949E] mb-8 leading-relaxed">
+            <p className="text-muted-foreground mb-8 leading-relaxed">
               {mainFeature.description}
             </p>
 
             {/* Stats Grid */}
             <div className="grid grid-cols-3 gap-4 mb-8">
               {Object.entries(mainFeature.stats).map(([key, value]) => (
-                <div key={key} className="text-center p-4 bg-[#0D1117] rounded-lg border border-[#21262D]">
-                  <div className="text-2xl font-bold bg-gradient-to-r from-[#58A6FF] to-[#7C3AED] bg-clip-text text-transparent">
+                <div key={key} className="text-center p-4 bg-background rounded-lg border border-muted">
+                  <div className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
                     {value}
                   </div>
-                  <div className="text-xs text-[#8B949E] capitalize mt-1">{key}</div>
+                  <div className="text-xs text-muted-foreground capitalize mt-1">{key}</div>
                 </div>
               ))}
             </div>
 
             {/* Benefits List */}
             <div className="space-y-3">
-              <h4 className="text-lg font-semibold text-[#C9D1D9] mb-4">Key Benefits:</h4>
+              <h4 className="text-lg font-semibold text-card-foreground mb-4">Key Benefits:</h4>
               {mainFeature.benefits.map((benefit, index) => (
                 <motion.div
                   key={index}
@@ -134,8 +134,8 @@ export function Features() {
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   className="flex items-start space-x-3"
                 >
-                  <CheckCircle className="h-5 w-5 text-[#10B981] mt-0.5 flex-shrink-0" />
-                  <span className="text-[#8B949E] text-sm leading-relaxed">{benefit}</span>
+                  <CheckCircle className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" />
+                  <span className="text-muted-foreground text-sm leading-relaxed">{benefit}</span>
                 </motion.div>
               ))}
             </div>
@@ -155,7 +155,7 @@ export function Features() {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="bg-[#161B22] border border-[#30363D] rounded-xl p-6 hover:bg-[#21262D] hover:border-[#58A6FF]/30 transition-all duration-300 group"
+                className="bg-card border border-border rounded-xl p-6 hover:bg-muted hover:border-primary/30 transition-all duration-300 group"
               >
                 <div className="flex items-start space-x-4">
                   {/* Feature Icon */}
@@ -165,10 +165,10 @@ export function Features() {
                   
                   {/* Feature Content */}
                   <div className="flex-1">
-                    <h4 className="text-lg font-semibold text-[#C9D1D9] mb-2 group-hover:text-[#58A6FF] transition-colors duration-300">
+                    <h4 className="text-lg font-semibold text-card-foreground mb-2 group-hover:text-primary transition-colors duration-300">
                       {feature.title}
                     </h4>
-                    <p className="text-[#8B949E] text-sm leading-relaxed">
+                    <p className="text-muted-foreground text-sm leading-relaxed">
                       {feature.description}
                     </p>
                   </div>
@@ -176,7 +176,7 @@ export function Features() {
                 
                 {/* Divider (except for last item) */}
                 {index < otherFeatures.length - 1 && (
-                  <div className="mt-6 pt-6 border-t border-[#21262D]"></div>
+                  <div className="mt-6 pt-6 border-t border-muted"></div>
                 )}
               </motion.div>
             ))}
@@ -191,17 +191,17 @@ export function Features() {
           viewport={{ once: true }}
           className="mt-16 text-center"
         >
-          <div className="bg-[#161B22] border border-[#30363D] rounded-2xl p-8 max-w-2xl mx-auto">
-            <h3 className="text-2xl font-bold text-[#C9D1D9] mb-4">
+          <div className="bg-card border border-border rounded-2xl p-8 max-w-2xl mx-auto">
+            <h3 className="text-2xl font-bold text-card-foreground mb-4">
               Ready to Experience Zero-Knowledge Privacy?
             </h3>
-            <p className="text-[#8B949E] mb-6">
+            <p className="text-muted-foreground mb-6">
               Join thousands of users who trust KqRLO for their identity verification needs.
             </p>
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="bg-gradient-to-r from-[#58A6FF] to-[#7C3AED] hover:from-[#4A9EFF] hover:to-[#6D28D9] text-white font-semibold px-8 py-3 rounded-lg transition-all duration-300 shadow-lg hover:shadow-[#58A6FF]/25"
+              className="bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-primary-foreground font-semibold px-8 py-3 rounded-lg transition-all duration-300 shadow-lg hover:shadow-primary/25"
             >
               <Shield className="h-5 w-5 mr-2 inline" />
               Start Verification

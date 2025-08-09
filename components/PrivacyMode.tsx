@@ -3,9 +3,9 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
-  Eye, EyeOff, Shield, Lock, Unlock, Timer, 
-  Settings, QrCode, Key, Vault, Zap, AlertTriangle,
-  CheckCircle, XCircle, Info, ArrowRight, RefreshCw
+  Eye, Shield, Lock, Unlock, Timer, 
+  Settings, QrCode, Vault, Zap,
+  CheckCircle, XCircle, ArrowRight, RefreshCw
 } from 'lucide-react';
 
 interface PrivacySettings {
@@ -21,7 +21,7 @@ interface ZKProof {
   type: 'age' | 'nationality' | 'citizenship' | 'custom';
   status: 'pending' | 'verified' | 'failed';
   timestamp: Date;
-  data: Record<string, any>;
+  data: Record<string, unknown>;
 }
 
 export function PrivacyMode() {
@@ -223,7 +223,7 @@ export function PrivacyMode() {
                     key={level}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    onClick={() => setSettings({ ...settings, proofLevel: level as any })}
+                    onClick={() => setSettings({ ...settings, proofLevel: level as 'basic' | 'selective' | 'advanced' })}
                     className={`w-full p-3 rounded-xl text-left transition-all duration-300 ${
                       settings.proofLevel === level
                         ? 'bg-zk-primary text-white shadow-proof'

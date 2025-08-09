@@ -25,10 +25,20 @@ export function Navbar() {
     { name: 'Home', href: '#home' },
     { name: 'Features', href: '#features' },
     { name: 'Privacy & Security', href: '#privacy-security' },
-    // { name: 'How It Works', href: '#how-it-works' },
+    { name: 'ZK Identity', href: '/identity' },
     { name: 'About', href: '#about' },
-    // { name: 'Contact', href: '#contact' }
   ];
+
+  const scrollToSection = (href: string) => {
+    if (href.startsWith('#')) {
+      const element = document.getElementById(href.substring(1));
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    } else {
+      window.location.href = href;
+    }
+  };
 
   // const dropdownItems = [
   //   { name: 'Documentation', href: '/docs' },
@@ -71,15 +81,15 @@ export function Navbar() {
             {/* Desktop Navigation with Perfect Alignment and Consistent Spacing */}
             <div className="hidden lg:flex items-baseline space-x-1 flex-1 justify-center px-4">
               {navItems.map((item) => (
-                <motion.a
+                <motion.button
                   key={item.name}
-                  href={item.href}
+                  onClick={() => scrollToSection(item.href)}
                   className="text-muted-foreground hover:text-foreground transition-colors duration-200 font-medium relative group px-3 py-2 whitespace-nowrap text-sm leading-5"
                   whileHover={{ y: -2 }}
                 >
                   {item.name}
                   <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-primary/80 group-hover:w-full transition-all duration-300"></span>
-                </motion.a>
+                </motion.button>
               ))}
 
               {/* Resources Dropdown */}
@@ -154,17 +164,19 @@ export function Navbar() {
             >
               <div className="flex flex-col space-y-4 pt-4">
                 {navItems.map((item, index) => (
-                  <motion.a
+                  <motion.button
                     key={item.name}
-                    href={item.href}
-                    className="text-muted-foreground hover:text-foreground transition-colors duration-200 font-medium py-2"
-                    onClick={() => setIsMenuOpen(false)}
+                    onClick={() => {
+                      scrollToSection(item.href);
+                      setIsMenuOpen(false);
+                    }}
+                    className="text-muted-foreground hover:text-foreground transition-colors duration-200 font-medium py-2 text-left w-full"
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: index * 0.1 }}
                   >
                     {item.name}
-                  </motion.a>
+                  </motion.button>
                 ))}
 
                 {/* Mobile Resources */}

@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Github, Twitter, Mail, Shield, Lock, Eye, Globe, Heart } from 'lucide-react';
+import { Github, Twitter, Mail, Shield, Lock, Heart } from 'lucide-react';
 
 export function Footer() {
   const links = {

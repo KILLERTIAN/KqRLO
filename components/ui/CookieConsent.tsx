@@ -77,7 +77,7 @@ export function CookieConsent() {
     {
       id: 'marketing',
       title: 'Marketing Cookies',
-      description: 'Used to track visitors across websites for marketing purposes. (We don\'t use these)',
+      description: 'Used to track visitors across websites for marketing purposes. (We don&apos;t use these)',
       required: false
     }
   ];
@@ -117,7 +117,7 @@ export function CookieConsent() {
                         </h3>
                         <p className="text-gray-300 text-sm leading-relaxed">
                           We use privacy-first cookies to enhance your experience. Unlike most websites, 
-                          we don't track you across the internet or sell your data. You have full control 
+                          we don&apos;t track you across the internet or sell your data. You have full control 
                           over what data we collect.
                         </p>
                       </div>

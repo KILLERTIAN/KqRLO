@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Shield, Lock, Eye, ArrowRight, CheckCircle, Zap, Globe, Star } from 'lucide-react';
+import { Shield, Lock, Eye, ArrowRight, CheckCircle, Zap, Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 export function Hero() {

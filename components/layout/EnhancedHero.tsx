@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, AnimatePresence } from 'framer-motion';
-import { Shield, Lock, Eye, ArrowRight, Sparkles, Zap, Globe, Star, Heart, Radar } from 'lucide-react';
+import { Shield, Lock, Eye, ArrowRight, Sparkles, Zap, Heart, Radar } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { XConnectButton } from '@/components/XConnectButton';
 import { useState, useEffect } from 'react';
@@ -260,7 +260,11 @@ export function EnhancedHero() {
                 <motion.div
                   key={particle.id}
                   className="absolute w-3 h-3 rounded-full"
-                  style={{ backgroundColor: particle.color }}
+                  style={{ 
+                    backgroundColor: particle.color,
+                    left: '50%',
+                    top: '50%'
+                  }}
                   initial={{ 
                     x: 0, 
                     y: 0, 
@@ -277,10 +281,6 @@ export function EnhancedHero() {
                   transition={{ 
                     duration: 3,
                     ease: "easeOut"
-                  }}
-                  style={{
-                    left: '50%',
-                    top: '50%'
                   }}
                 />
               ))}

@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Shield, Lock, Eye, EyeOff, CheckCircle, XCircle, 
-  Clock, Key, Vault, Zap, Star, Crown, Award
+  Clock, Vault, Zap
 } from 'lucide-react';
 
 interface IdentityProof {
@@ -26,7 +26,6 @@ interface IdentityCardProps {
 
 export function IdentityCard({ proofs, isPrivate = false, onTogglePrivacy }: IdentityCardProps) {
   const [selectedProof, setSelectedProof] = useState<IdentityProof | null>(null);
-  const [showDetails, setShowDetails] = useState(false);
 
   const getProofIcon = (type: string) => {
     switch (type.toLowerCase()) {
